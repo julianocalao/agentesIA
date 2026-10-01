@@ -9,6 +9,8 @@
 7. Saídas e memória ficam no negócio selecionado, jamais junto às skills globais. Não persistir seleção/memória sem autorização do usuário. Não salvar tokens no contexto.
 8. Publicação, gastos e acesso Meta requerem seus próprios ativos e autorizações; READY não autoriza escrita externa.
 9. Sequência: resolver contexto → chief tria → especialista nomeado e tarefa existente → executar → revisar. Sem rota não inventar agente/resultado. Cada revisão informa fontes e limitações reais.
+10. Padrão cérebro do Context OS: se existir `<raiz>/negocios/<slug>/cerebro/`, ele é o conhecimento detalhado do negócio e o `businesses/<slug>/contexto.md` é gerado a partir dele. Para detalhe além do resumo (voz e marca em `cerebro/areas/marketing/contexto/brand.yaml`, identidade visual e design system em `cerebro/areas/marketing/contexto/`, ICP e empresa em `cerebro/empresa/contexto/`, preço em `cerebro/areas/vendas/contexto/`), siga a seção "Onde ler o detalhe" do `contexto.md`. Somente leitura: skill de domínio nunca escreve no cérebro, e arquivo ausente é lacuna declarada. Pastas do formato antigo (`businesses/<slug>/context/`, `brand-dna/`, `intelligence/`, `workspace/businesses/`) não existem nesse padrão.
+11. Sem contexto: `coreai-contexto` encaminha. Com o padrão cérebro, a criação e a entrevista do negócio são da skill `coreai-contextos` (CoreAI:ContextOS:Criar e Perguntar), nunca dos comandos de scaffold da `coreai-contexto`.
 
 Não importa templates nem serviços de Workspace/COO. Método adaptado de context-create e context-quick; a consolidação reduz atrito, preservando fontes, lacunas e validação humana.
 

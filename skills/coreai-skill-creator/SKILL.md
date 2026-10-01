@@ -43,16 +43,16 @@ Se o usuário já forneceu informações suficientes em $ARGUMENTS, preencha o q
 
 ### ETAPA 1.5: ContextOS Integration (Se a skill precisa de dados de empresa)
 
-**Se a resposta da pergunta 8 foi SIM**, leia o protocolo em `${CLAUDE_SKILL_DIR}/../CONTEXT-OS-PROTOCOL.md` e defina:
+**Se a resposta da pergunta 8 foi SIM**, leia o contrato em `${CLAUDE_SKILL_DIR}/../coreai-shared/contextos-contract.md` e defina:
 
 1. **Dados Lidos:** Quais paths do ContextOS a skill vai consultar?
-   - `context/company-profile.yaml` �� perfil da empresa
-   - `context/icp.yaml` — perfil do cliente ideal
-   - `context/pricing.yaml` — precos e planos
-   - `brand-dna/voice.yaml` — tom de voz
-   - `brand-dna/visual-identity.yaml` — identidade visual
-   - `design-system/tokens.yaml` — design tokens
-   - `products/{slug}.yaml` — dados do produto
+   - `businesses/<slug>/contexto.md` — resumo obrigatório (vem em `sources` do gate)
+   - `negocios/<slug>/cerebro/empresa/contexto/company-profile.yaml` e `icp.yaml` — empresa e cliente ideal
+   - `negocios/<slug>/cerebro/areas/vendas/contexto/pricing.yaml` — preços e planos
+   - `negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml` — marca e voz (`voice_dna`)
+   - `negocios/<slug>/cerebro/areas/marketing/contexto/visual-identity.yaml` e `design-system/` — identidade e tokens
+   - `negocios/<slug>/cerebro/areas/produto/` — produtos
+   (caminhos relativos à raiz; siga a seção "Onde ler o detalhe" do `contexto.md`; ausente = lacuna)
 
 2. **Dados Escritos:** A skill vai salvar algo de volta no ContextOS?
 
@@ -155,11 +155,11 @@ Leia o arquivo ${CLAUDE_SKILL_DIR}/{arquivo-auxiliar}.md para {propósito}.
 
 ### Fase 1: Context Resolution (obrigatorio se tem ContextOS Integration)
 
-1. Buscar `context-os/` no workspace
-2. Ler `config.yaml` → empresa ativa
-3. Carregar dados dos paths declarados acima
-4. Se ContextOS nao existe → sugerir `/context-create *init`
-5. Se dados incompletos → avisar e decidir (halt ou prosseguir)
+1. Receber a raiz por `--root` (nunca varrer o workspace atrás de `context-os/`)
+2. Rodar `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino em businesses/<slug>/outputs/>`
+3. Ler `sources` e os arquivos do cérebro declarados acima (somente leitura)
+4. Sem contexto → encaminhar para `coreai-contextos` (padrão cérebro) ou `coreai-contexto`
+5. Se dados incompletos → avisar e decidir (halt ou prosseguir), nunca inventar
 
 ### Fase 2+: {Resto do processo}
 

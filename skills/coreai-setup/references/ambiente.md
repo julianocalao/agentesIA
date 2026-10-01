@@ -42,6 +42,8 @@ python skills/coreai-contexto/scripts/contextos.py --help
 Resultado esperado: ajuda com init, add-business e status. Erro de módulo yaml indica que o pip foi executado em outro Python; use `python -m pip` dentro do ambiente.
 
 ## 4. Iniciar a empresa
+> Com a skill `coreai-contextos` instalada, use-a (padrão cérebro) em vez dos comandos abaixo, que criam o layout clássico.
+
 Escolha um caminho absoluto para guardar seus dados, substitua `/CAMINHO/contextos` e `minha-empresa` abaixo pelos seus valores. No Windows use caminho como `C:/Users/SEU-USUARIO/contextos`.
 
 ```sh

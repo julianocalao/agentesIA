@@ -4,6 +4,12 @@ description: ContextOS original — bootstrap multiempresa, 30 templates, coleta
 ---
 # CoreAI:Contexto — ContextOS
 
+> **Padrão cérebro:** se a raiz tiver `negocios/<slug>/cerebro/`, esta skill só faz `status`.
+> Criar negócio, entrevistar, importar respostas e consolidar passam a ser da skill `coreai-contextos`
+> (CoreAI:ContextOS:Criar, Perguntar, Status); o `contextos.py` recusa os outros comandos nessa raiz,
+> porque recriaria em `businesses/<slug>/` o formato antigo (`context/`, `brand-dna/`, `evidence/`).
+> Nesse padrão o `businesses/<slug>/contexto.md` é gerado a partir do cérebro, não pelo `consolidate`.
+
 Use esta skill para construir e enriquecer ContextOS. Biblioteca fora do cliente; raiz explicitamente escolhida pelo usuário. Layout `<ROOT>/businesses/<slug>`. Nunca produzir `contexto.md` vazio ou com placeholders para liberar outros agentes.
 
 Leia `references/context-create-method.md` integralmente para o método de seis fases, gates de 85%, entrevistas, propagação de marca, inteligência e validação cruzada. Leia `references/context-quick-method.md`, `references/context-deep-method.md` e `references/context-enrich-method.md` conforme a rota. Os 30 templates legítimos ContextOS e os bancos originais estão incluídos. As instruções de paths/comandos nesta entrada prevalecem sobre nomes históricos nos métodos.

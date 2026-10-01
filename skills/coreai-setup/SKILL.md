@@ -16,7 +16,7 @@ Identifique sistema operacional, Claude Code ou Codex, pasta do kit e configura�
 
 1. Leia `references/ambiente.md`: runtime, dependências, instalação seletiva e descoberta das skills.
 2. Liste o catálogo real com `scripts/install.py --source <skills> --list`. Instale somente nomes presentes, no destino solicitado (`--target claude`, `codex` ou `both`). Conflito bloqueia sem sobrescrever. Verifique `--status` e descoberta numa nova sessão. `--global-root` é apenas para testes isolados.
-3. Leia e execute `../coreai-contexto/SKILL.md`: inicialização, empresa ativa, entrevista com fontes e consolidação revisada. Pasta/template vazio não é contexto pronto. Confira com o gate compartilhado.
+3. Se a skill `coreai-contextos` estiver instalada, o contexto é dela (padrão cérebro: CoreAI:ContextOS:Instalar e Criar). Senão, leia e execute `../coreai-contexto/SKILL.md`: inicialização, empresa ativa, entrevista com fontes e consolidação revisada. Pasta/template vazio não é contexto pronto. Confira com o gate compartilhado.
 4. Leia `references/connectors-setup.md`: Drive no ambiente escolhido, leitura de documento conhecido, alternativa por exportação e Gemini. Conector do chat não implica ferramenta no terminal.
 5. Leia `references/meta-setup.md`: aplicativo, portfólio, System User, ativos, permissões, token privado e conferência. Login e autorização são realizados pelo titular; guie sem pedir segredos no chat.
 6. Faça ensaio local da etapa disponível. Acesso a conta externa precisa de verificação própria; esta skill não publica conteúdo nem ativa campanhas como teste de setup.

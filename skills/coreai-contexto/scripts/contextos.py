@@ -26,17 +26,17 @@ def safe(root, rel=''):
 
 def write(p, data, exclusive=False):
     p.parent.mkdir(parents=True,exist_ok=True)
-    with p.open('x' if exclusive else 'w') as f:
+    with p.open('x' if exclusive else 'w', encoding='utf-8') as f:
         if p.suffix=='.json': json.dump(data,f,ensure_ascii=False,indent=2)
         elif p.suffix=='.yaml': yaml.safe_dump(data,f,allow_unicode=True,sort_keys=False)
         else: f.write(data)
 
 def load(p,default=None):
     if not p.exists(): return default
-    return yaml.safe_load(p.read_text())
+    return yaml.safe_load(p.read_text(encoding='utf-8'))
 
 def questions(mode):
-    data=json.loads((BASE/'data'/f'questions-{mode}.json').read_text())
+    data=json.loads((BASE/'data'/f'questions-{mode}.json').read_text(encoding='utf-8'))
     if mode=='quick': return data
     return [dict(q,phase=phase['id']) for phase in data['DEEP_PHASES'] for q in phase['questions']]
 
@@ -51,6 +51,13 @@ def main(argv=None):
     args=a.parse_args(argv)
     root=args.root.expanduser().absolute();safe(root)
     cfgp=safe(root,'config.json');cfg=load(cfgp)
+    # Padrao cerebro do Context OS (negocios/<slug>/cerebro): o scaffold deste script
+    # recriaria em businesses/<slug>/ o formato antigo (context/, brand-dna/, evidence/...)
+    # e gravaria config.json, que nesse padrao e camada gerada. So status continua.
+    if safe(root,'negocios').is_dir() and args.command!='status':
+        raise ValueError('Raiz no padrao cerebro (negocios/<slug>/cerebro): use a skill coreai-contextos '
+            '(CoreAI:ContextOS:Criar/Perguntar/Status). Para trocar o negocio ativo nesta maquina: '
+            'node <raiz>/nucleo/motor/negocio-ativo.mjs trocar <slug>.')
     if args.command=='init':
         for part in ('businesses','data','dashboard','.cache'):safe(root,part).mkdir(parents=True,exist_ok=True)
         if cfg is None:
@@ -67,7 +74,9 @@ def main(argv=None):
             if p.is_dir():
                 records=load(safe(root,str(p.relative_to(root))+'/evidence/answers.json'),{})
                 result.append({'business':p.name,'answers':len(records),'quick_total':len(questions('quick')),'deep_total':len(questions('deep')),'consolidated':safe(root,str(p.relative_to(root))+'/contexto.md').is_file(),'semantic_review':'not_automatically_verified'})
-        return {'active_business':cfg.get('active_business'),'businesses':result}
+        out={'active_business':cfg.get('active_business'),'businesses':result}
+        if safe(root,'negocios').is_dir():out['layout']='cerebro';out['nota']='answers conta o formato antigo; no padrao cerebro use node <raiz>/nucleo/onboarding/entrevistar.mjs todos'
+        return out
     slug=args.business
     if not slug or not re.fullmatch(r'[a-z][a-z0-9_-]*',slug): raise ValueError('Explicit valid --business required')
     b=safe(root,'businesses/'+slug)
@@ -93,7 +102,7 @@ def main(argv=None):
     if args.command=='questions':return {'mode':args.mode,'questions':[dict(q,id=key(q),answered=key(q) in records) for q in qs]}
     if args.command=='import-answers':
         if args.answers is None: raise ValueError('--answers JSON list required')
-        items=json.loads(args.answers.read_text());known={key(q):q for q in questions('quick')+questions('deep')}
+        items=json.loads(args.answers.read_text(encoding='utf-8'));known={key(q):q for q in questions('quick')+questions('deep')}
         if not isinstance(items,list):raise ValueError('Expected JSON list')
         pending={};newrecords=dict(records)
         for item in items:
@@ -103,7 +112,7 @@ def main(argv=None):
             if not real(v):raise ValueError('Empty/placeholder answer')
             if not isinstance(source,str) or not source.startswith('sources/'):raise ValueError('source must be client-relative sources/file')
             sp=bp(source)
-            if not sp.is_file() or not sp.read_text().strip():raise ValueError('Source missing/empty')
+            if not sp.is_file() or not sp.read_text(encoding='utf-8').strip():raise ValueError('Source missing/empty')
             if q.get('type')=='number' and (isinstance(v,bool) or not isinstance(v,(int,float))):raise ValueError('Number required')
             if q.get('type')=='list' and not isinstance(v,list):raise ValueError('List required')
             if k in records and records[k]['value']!=v:raise ValueError('Existing answer conflict; no overwrite')
@@ -131,7 +140,7 @@ def main(argv=None):
             if hashlib.sha256(sp.read_bytes()).hexdigest()!=v['source_sha256']:raise ValueError('Source changed; review required')
             lines += ['## '+v['question'],json.dumps(v['value'],ensure_ascii=False),f"Fonte: {v['source']} | SHA256: {v['source_sha256']}",f'Campo: {k}','']
         out=bp('contexto.md');content='\n'.join(lines)
-        if out.exists() and out.read_text()!=content:raise ValueError('Consolidated context exists; no overwrite')
+        if out.exists() and out.read_text(encoding='utf-8')!=content:raise ValueError('Consolidated context exists; no overwrite')
         if not out.exists():write(out,content,True)
         return {'status':'CONSOLIDATED','answers':len(records),'semantic_review':'human_declared','output':str(out)}
 if __name__=='__main__':

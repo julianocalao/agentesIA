@@ -5,6 +5,10 @@ description: "ContextOS - Sistema operacional de contexto empresarial. Esta skil
 
 # ContextOS - Sistema Operacional de Contexto
 
+> **Aposentada.** Esta skill cria o layout antigo (`context-os/businesses/<slug>/context|brand-dna|operations`).
+> Não use para contexto novo: use `coreai-contextos` (padrão cérebro, `negocios/<slug>/cerebro/`) ou, no layout
+> clássico do pacote, `coreai-contexto`. Os scripts daqui não devem ser executados.
+
 Sistema que constroi e gerencia o contexto completo de empresas dentro do workspace do usuario. Coleta, organiza e disponibiliza todas as informacoes de negocio para que agentes, skills e squads tenham contexto rico ao executar qualquer tarefa.
 
 ## Quando Usar
