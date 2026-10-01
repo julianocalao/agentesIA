@@ -547,7 +547,7 @@ outputs:
 
   final_deliverable:
     name: "Perfect Webinar Package"
-    location: "outputs/webinars/{webinar_id}/"
+    location: "<raiz>/businesses/<slug>/outputs/webinars/{webinar_id}/"  # validado antes por coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino-absoluto>
     contents:
       - "complete_script.md - Full webinar script"
       - "stack_slide.yaml - Stack Slide data"

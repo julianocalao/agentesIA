@@ -284,7 +284,7 @@ Use when:
 ### Workspace
 
 ```text
-outputs/slide-creator/{deck_id}/
+<raiz>/businesses/<slug>/outputs/slides/{deck_id}/   # validado por coreai-shared/scripts/gate.py
   inputs/
   briefing-normalized.yaml
   story-arc.yaml

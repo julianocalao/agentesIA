@@ -5,7 +5,7 @@ Use these contracts when the user asks for a complete deck package, machine-read
 ## Full Package Structure
 
 ```text
-slide-creator-output/
+<raiz>/businesses/<slug>/outputs/slides/<run_id>/
   briefing-normalized.yaml
   audience-belief-shift.yaml
   story-arc.yaml
@@ -42,16 +42,16 @@ slide-creator-output/
   forward-test.yaml
 ```
 
-If writing files, place them in a user-specified directory. If no directory is specified in this repository, use `outputs/slide-creator/{deck-slug}/`.
+If writing files, the destination is always `<raiz>/businesses/<slug>/outputs/slides/<run_id>/` inside the Context OS root received by parameter (`--root`/`--context-root`); never a path relative to the current directory. Before writing, validate it with `python "${CLAUDE_SKILL_DIR}/../coreai-shared/scripts/gate.py" --root <raiz> --business <slug> --output "$DECK_DIR"` (must return READY). Below, `DECK_DIR` is that absolute destination.
 
 When writing machine-readable files, prefer YAML for core deck artifacts and JSON for validation reports. Before final delivery, run:
 
 ```bash
-python scripts/build_evidence_ledger.py slide-creator-output/deck-spec.yaml --output slide-creator-output/source-ledger.yaml
-python scripts/run_regression_fixtures.py slide-creator-output --json > slide-creator-output/regression-fixture-report.json
-python scripts/validate_rendered_eval.py slide-creator-output/rendered-eval.yaml --package-root slide-creator-output --json > slide-creator-output/rendered-eval.validation.json
-python scripts/validate_runtime_contracts.py slide-creator-output --json > slide-creator-output/runtime-contracts.validation.json
-python scripts/validate_deck_package.py slide-creator-output --json > slide-creator-output/package-validation-report.json
+python "${CLAUDE_SKILL_DIR}/scripts/build_evidence_ledger.py" "$DECK_DIR/deck-spec.yaml" --output "$DECK_DIR/source-ledger.yaml"
+python "${CLAUDE_SKILL_DIR}/scripts/run_regression_fixtures.py" "$DECK_DIR" --json > "$DECK_DIR/regression-fixture-report.json"
+python "${CLAUDE_SKILL_DIR}/scripts/validate_rendered_eval.py" "$DECK_DIR/rendered-eval.yaml" --package-root "$DECK_DIR" --json > "$DECK_DIR/rendered-eval.validation.json"
+python "${CLAUDE_SKILL_DIR}/scripts/validate_runtime_contracts.py" "$DECK_DIR" --json > "$DECK_DIR/runtime-contracts.validation.json"
+python "${CLAUDE_SKILL_DIR}/scripts/validate_deck_package.py" "$DECK_DIR" --json > "$DECK_DIR/package-validation-report.json"
 ```
 
 `validate_deck_package.py` uses `--profile full` by default. Use `--profile minimal` only for smoke tests or partial drafts that are not being delivered as a complete skill package.
@@ -462,7 +462,7 @@ chart_dataset:
 Validate with:
 
 ```bash
-python scripts/validate_chart_data.py slide-creator-output/chart-datasets/chart-s01-01.yaml --json > slide-creator-output/chart-datasets/chart-s01-01.validation.json
+python "${CLAUDE_SKILL_DIR}/scripts/validate_chart_data.py" "$DECK_DIR/chart-datasets/chart-s01-01.yaml" --json > "$DECK_DIR/chart-datasets/chart-s01-01.validation.json"
 ```
 
 ## Diagram Manifest

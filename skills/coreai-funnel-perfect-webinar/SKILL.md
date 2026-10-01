@@ -47,7 +47,7 @@ Use `references/agents/brunson-offers.md`. Estruture componentes reais, apresent
 
 Aplique checklists locais no INDEX por fase, nesta ordem: Big Domino/Three Secrets; Epiphany Bridge/story inventory; Perfect Webinar/presentation flow; stack/value stack/guarantee/scarcity. Critérios conflitantes com verdade factual ou oferta real são registrados como não aplicáveis, nunca satisfeitos por invenção. Revise até duas vezes; se restar lacuna factual ou decisão humana, entregue rascunho com pendências.
 
-Na pasta de outputs já convencionada pelo projeto ou indicada pelo usuário, salve sem sobrescrever:
+Salve sempre em `<raiz>/businesses/<slug>/outputs/webinars/{webinar_id}/` (raiz do Context OS recebida por `--root`/`--context-root`; nunca caminho relativo ao diretório atual), depois de validar o destino com `python "${CLAUDE_SKILL_DIR}/../coreai-shared/scripts/gate.py" --root <raiz> --business <slug> --output <destino-absoluto>` (precisa devolver READY). Não sobrescreva:
 
 - `complete_script.md`: roteiro completo, fala e notas separadas.
 - `slides_outline.md`: sequência, título, mensagem, texto proposto e nota por slide; não renderizar.

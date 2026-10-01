@@ -6,17 +6,17 @@ Tom NÚCLEO Torriani: você não pesquisa, você espreita.
 
 ## Instalação
 
-A skill está em `~/.claude/skills/stalk/`. Para instalar do zero em outra máquina:
+A skill é a pasta `coreai-stalk/` dentro do diretório de skills do Claude Code. Para instalar do zero em outra máquina:
 
 ```bash
 # 1. Copiar a pasta
-cp -r stalk ~/.claude/skills/
+cp -r coreai-stalk <pasta-de-skills>/
 
 # 2. Garantir permissões de execução
-chmod +x ~/.claude/skills/stalk/scripts/stalk.sh \
-  ~/.claude/skills/stalk/scripts/bootstrap.sh \
-  ~/.claude/skills/stalk/scripts/lib/*.sh \
-  ~/.claude/skills/stalk/scripts/commands/*.sh
+chmod +x <pasta-de-skills>/coreai-stalk/scripts/stalk.sh \
+  <pasta-de-skills>/coreai-stalk/scripts/bootstrap.sh \
+  <pasta-de-skills>/coreai-stalk/scripts/lib/*.sh \
+  <pasta-de-skills>/coreai-stalk/scripts/commands/*.sh
 ```
 
 Pronto. Próxima vez que você invocar `/stalk` no Claude Code, a skill é descoberta automaticamente pelo SKILL.md.
@@ -107,13 +107,13 @@ A skill busca o token em 3 camadas, na ordem:
 Todos os comandos salvam em estrutura previsível:
 
 ```
-${STALK_OUTPUT_BASE:-./outputs/copys}/{cliente}/inteligencia/{tipo}/{slug}/
+<raiz>/businesses/<slug>/outputs/inteligencia/{tipo}/{item}/
 ├── data.json       # dados crus Apify
 ├── analysis.md     # intermediário (opcional)
 └── RELATORIO.md    # entrega final ao usuário
 ```
 
-Cliente padrão: `default`. Configure com `/stalk config default_client <slug>` ou flag `--client <slug>`.
+Negócio obrigatório: flag `--client <slug>` ou `/stalk config default_client <slug>`. Raiz do Context OS obrigatória e absoluta: `--root <raiz>` (ou `CONTEXT_OS_ROOT`). Sem uma das duas o comando falha; o destino passa antes pelo gate `coreai-shared/scripts/gate.py`.
 
 ## Custo
 
@@ -168,7 +168,7 @@ Os prompts seguem padrão do `@competitor-analyst` do squad Conteudo.
 ## Estrutura de arquivos
 
 ```
-~/.claude/skills/stalk/
+coreai-stalk/
 ├── SKILL.md                  # entrypoint Claude Code
 ├── README.md                 # este arquivo
 ├── config.yaml               # criado pelo /stalk config

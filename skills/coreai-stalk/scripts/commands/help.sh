@@ -23,7 +23,7 @@ stalk_cmd_help() {
     --stories                Stories ativos + highlights
     --snapshot               Salva estado para diff futuro
     --me                     Usa handle padrão (config)
-    --client <slug>          Pasta de output específica
+    --client <slug>          Negócio do Context OS (obrigatório, ou default_client)
 
   /stalk search "termo" [flags]   (detecta # automaticamente)
     --hooks                  Só os hooks dos top 50
@@ -79,7 +79,7 @@ EOF
   echo "  comments:         ~\$0.02 USD"
   echo "  reels:            ~\$0.02 USD"
   echo ""
-  echo "📂 Output: \${STALK_OUTPUT_BASE:-./outputs/copys}/{cliente}/inteligencia/"
+  echo "📂 Output: <raiz>/businesses/<slug>/outputs/inteligencia/  (exige --root <raiz> e --client <slug>; validado pelo gate)"
   echo "📚 Docs:   $SKILL_DIR/README.md"
   echo ""
 }

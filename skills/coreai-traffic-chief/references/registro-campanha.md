@@ -1,5 +1,5 @@
 # Registro local (fora das skills)
-Usar businesses/<slug>/campanhas/<campanha>/ na raiz ContextOS escolhida, se salvamento autorizado. Não sobrescrever registros anteriores.
+Usar businesses/<slug>/outputs/campanhas/<campanha>/ na raiz ContextOS escolhida (validado antes por coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino-absoluto>), se salvamento autorizado. Não sobrescrever registros anteriores.
 
 campaign-brief.md: negócio, produto, fontes, objetivo, destino, público, copy/imagem, conta ID/nome, moeda, tipo/verba/período, medição, decisões, lacunas.
 tracking-review.md: aplicabilidade, evento/ativo, fonte observada/data, limitações.

@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 # coreai-stalk/scripts/lib/output.sh
-# Padroniza paths de output em ./outputs/copys/{cliente}/inteligencia/ (relativo ao
-# diretório de trabalho atual, a menos que STALK_OUTPUT_BASE seja definido)
+# Padroniza paths de output em <raiz>/businesses/<slug>/outputs/inteligencia/{tipo}/{item}/
+# A raiz do Context OS chega por --root/--context-root (exportada pelo stalk.sh) ou pela
+# variável CONTEXT_OS_ROOT; o negócio chega por --client <slug>, CONTEXT_OS_BUSINESS ou
+# default_client do config. Sem raiz ou sem negócio, falha: não existe default relativo.
+# Todo destino passa antes por coreai-shared/scripts/gate.py (precisa devolver READY).
 
 set -euo pipefail
 
-STALK_OUTPUT_BASE="${STALK_OUTPUT_BASE:-./outputs/copys}"
-STALK_CONFIG_FILE="$HOME/.claude/skills/coreai-stalk/config.yaml"
+STALK_SKILL_DIR="${STALK_SKILL_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
+STALK_CONFIG_FILE="${STALK_CONFIG_FILE:-$STALK_SKILL_DIR/config.yaml}"
+STALK_GATE="${STALK_GATE:-$STALK_SKILL_DIR/../coreai-shared/scripts/gate.py}"
 
 # Lê valor de chave do config.yaml. Args: $1=chave
 stalk_config_get() {
@@ -47,9 +51,41 @@ stalk_slugify() {
 stalk_output_dir() {
   local tipo="$1"
   local slug="$2"
-  local cliente="${3:-$(stalk_config_get default_client default)}"
+  local cliente="${3:-${CONTEXT_OS_BUSINESS:-$(stalk_config_get default_client '')}}"
+  local root="${CONTEXT_OS_ROOT:-}"
 
-  local dir="$STALK_OUTPUT_BASE/$cliente/inteligencia/$tipo/$slug"
+  if [[ -z "$root" ]]; then
+    echo "❌ Raiz do Context OS não informada. Use --root <raiz> (ou exporte CONTEXT_OS_ROOT)." >&2
+    return 1
+  fi
+  if [[ "$root" != /* && ! "$root" =~ ^[A-Za-z]:[\/] ]]; then
+    echo "❌ A raiz do Context OS precisa ser um caminho absoluto: $root" >&2
+    return 1
+  fi
+  if [[ -z "$cliente" ]]; then
+    echo "❌ Negócio não informado. Use --client <slug> (ou /stalk config default_client <slug>)." >&2
+    return 1
+  fi
+
+  local base="${STALK_OUTPUT_BASE:-$root/businesses/$cliente/outputs/inteligencia}"
+  local dir="$base/$tipo/$slug"
+
+  if [[ ! -f "$STALK_GATE" ]]; then
+    echo "❌ Gate não encontrado: $STALK_GATE (instale coreai-shared ao lado desta skill)." >&2
+    return 1
+  fi
+  local py
+  py="$(command -v python3 || command -v python || true)"
+  if [[ -z "$py" ]]; then
+    echo "❌ Python não encontrado; o gate de saída é obrigatório." >&2
+    return 1
+  fi
+  local verdict
+  if ! verdict="$("$py" "$STALK_GATE" --root "$root" --business "$cliente" --output "$dir")"; then
+    echo "❌ Gate bloqueou o destino $dir: $verdict" >&2
+    return 1
+  fi
+
   mkdir -p "$dir"
   echo "$dir"
 }

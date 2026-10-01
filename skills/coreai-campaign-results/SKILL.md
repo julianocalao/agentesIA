@@ -18,6 +18,8 @@ Coleta e registra métricas finais de uma campanha.
   de qualquer escrita. Sem READY, bloqueie e ofereça `coreai-contexto`.
 - Campanha criada via `coreai-campaign-new`.
 - Arquivo `results.yaml` existe na pasta da campanha.
+- A raiz do Context OS chega por parâmetro (`--root`/`--context-root`); `BUSINESS_ROOT`
+  é `<raiz>/businesses/<slug>` e as campanhas ficam em `$BUSINESS_ROOT/outputs/campanhas/`.
 
 ## Passos
 
@@ -26,7 +28,7 @@ Coleta e registra métricas finais de uma campanha.
 Use `business_root` retornado pelo gate:
 
 ```bash
-ls "$BUSINESS_ROOT/marketing/campaigns/" | grep -v '^_' | grep -v assets
+ls "$BUSINESS_ROOT/outputs/campanhas/" | grep -v '^_' | grep -v assets
 ```
 
 Mostre numerada e peça escolha.
@@ -52,21 +54,27 @@ Aceite "skip" ou vazio para pular.
 
 ### 3. Escrever YAML
 
-Atualize `$BUSINESS_ROOT/marketing/campaigns/<slug>/results.yaml` preservando estrutura do template. Use Python inline com `yaml.safe_dump(allow_unicode=True, sort_keys=False)`.
+Valide o destino com o gate antes de escrever:
+
+```bash
+python "${CLAUDE_SKILL_DIR}/../coreai-shared/scripts/gate.py" --root "<raiz>" --business "<slug>" --output "$BUSINESS_ROOT/outputs/campanhas/<campanha>/results.yaml"   # precisa devolver READY
+```
+
+Atualize `$BUSINESS_ROOT/outputs/campanhas/<campanha>/results.yaml` preservando estrutura do template. Use Python inline com `yaml.safe_dump(allow_unicode=True, sort_keys=False)`.
 
 ### 4. Atualizar índice
 
-Em `_index.yaml`, mude `status: planejada` → `status: encerrada` e adicione `encerrada_em`.
+Em `$BUSINESS_ROOT/outputs/campanhas/_index.yaml` (também validado pelo gate), mude `status: planejada` → `status: encerrada` e adicione `encerrada_em`.
 
 ### 5. Resumo
 
 ```
-Resultados registrados: <slug>
+Resultados registrados: <campanha>
 ROI: <X>x | Vendas: <Y> | Receita: R$<Z>
-Local: <business_root>/marketing/campaigns/<slug>/results.yaml
+Local: <business_root>/outputs/campanhas/<campanha>/results.yaml
 ```
 
 ## Edge cases
 
 - Nenhuma campanha → sugerir `coreai-campaign-new`.
-- `results.yaml` ausente → copiar de `../coreai-campaign-new/templates/results.yaml` e seguir.
+- `results.yaml` ausente → copiar de `${CLAUDE_SKILL_DIR}/../coreai-campaign-new/templates/results.yaml` e seguir.

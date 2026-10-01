@@ -25,6 +25,21 @@ print_usage() {
   bash "$COMMANDS_DIR/help.sh"
 }
 
+# Extrai --root/--context-root <raiz> (raiz do Context OS) e exporta CONTEXT_OS_ROOT;
+# os demais argumentos seguem para o comando.
+STALK_ARGS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --root|--context-root)
+      [[ $# -ge 2 ]] || { echo "❌ $1 exige um caminho" >&2; exit 1; }
+      export CONTEXT_OS_ROOT="$2"; shift 2 ;;
+    --root=*|--context-root=*)
+      export CONTEXT_OS_ROOT="${1#*=}"; shift ;;
+    *) STALK_ARGS+=("$1"); shift ;;
+  esac
+done
+set -- ${STALK_ARGS[@]+"${STALK_ARGS[@]}"}
+
 main() {
   local cmd="${1:-help}"
   [[ $# -gt 0 ]] && shift

@@ -62,19 +62,23 @@ A skill é implementada em bash com pipeline:
 1. Parse comando + flags
 2. Carregar APIFY_TOKEN (env shell > ~/.claude/.env.global > bootstrap)
 3. Chamar Apify REST API
-4. Salvar dados crus + análise em `${STALK_OUTPUT_BASE:-./outputs/copys}/{cliente}/inteligencia/`
+4. Validar o destino com `coreai-shared/scripts/gate.py` (READY) e salvar dados crus + análise em `<raiz>/businesses/<slug>/outputs/inteligencia/`
 5. Imprimir relatório para o usuário
 ```
 
-**Para executar:** rode `bash scripts/stalk.sh <comando> [args]` (relativo a esta
-skill) via Bash tool. Para escolher onde salvar a saída, defina
-`STALK_OUTPUT_BASE` antes de rodar.
+**Para executar:** rode `bash "${CLAUDE_SKILL_DIR}/scripts/stalk.sh" <comando> [args] --root <raiz> --client <slug>`
+via Bash tool (o script fica na pasta desta skill, nunca relativo ao cwd). A raiz do
+Context OS é obrigatória (`--root`/`--context-root` ou `CONTEXT_OS_ROOT`), assim como o
+negócio (`--client <slug>` ou `default_client`); sem eles o comando falha em vez de
+gravar num caminho relativo. A saída fica sempre em
+`<raiz>/businesses/<slug>/outputs/inteligencia/` e passa antes pelo gate
+`coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino-absoluto>`.
 
 Exemplo:
 ```bash
-bash scripts/stalk.sh profile @raulbergesch
-bash scripts/stalk.sh search "advogado pme" --hooks --top 50
-bash scripts/stalk.sh dossie @raulbergesch --client bergesh-advogados
+bash "${CLAUDE_SKILL_DIR}/scripts/stalk.sh" profile @raulbergesch --root <raiz> --client <slug>
+bash "${CLAUDE_SKILL_DIR}/scripts/stalk.sh" search "advogado pme" --hooks --top 50 --root <raiz> --client <slug>
+bash "${CLAUDE_SKILL_DIR}/scripts/stalk.sh" dossie @raulbergesch --root <raiz> --client <slug>
 ```
 
 ## Bootstrap (primeira execução)
@@ -100,13 +104,13 @@ A LLM lê `data.json` + prompt e gera `RELATORIO.md` final no output folder.
 ## Output padrão
 
 ```
-${STALK_OUTPUT_BASE:-./outputs/copys}/{cliente}/inteligencia/{tipo}/{slug}/
+<raiz>/businesses/<slug>/outputs/inteligencia/{tipo}/{item}/
 ├── data.json       # dados crus Apify
 ├── analysis.md     # análise estruturada (intermediário)
 └── RELATORIO.md    # entrega final ao usuário
 ```
 
-Cliente padrão: `default`. Override com `--client <slug>` ou `/stalk config`.
+Negócio: `--client <slug>` ou `/stalk config default_client <slug>` (obrigatório, sem default). Raiz: `--root <raiz>` ou `CONTEXT_OS_ROOT` (obrigatória, absoluta).
 
 ## Princípios
 

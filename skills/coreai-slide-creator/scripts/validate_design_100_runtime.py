@@ -337,7 +337,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="SINKRA Design 100 runtime gate.")
     parser.add_argument(
         "run_dir",
-        help="Path to the run workspace, e.g. outputs/slides-creator/{run_id}/",
+        help="Path to the run workspace, e.g. <raiz>/businesses/<slug>/outputs/slides/{run_id}/",
     )
     parser.add_argument(
         "--strict",
