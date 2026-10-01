@@ -26,7 +26,7 @@ CRITICAL: Read the full YAML BLOCK that FOLLOWS IN THIS FILE to understand your 
 ```yaml
 IDE-FILE-RESOLUTION:
   - FOR LATER USE ONLY - NOT FOR ACTIVATION, when executing commands that reference dependencies
-  - Dependencies map to squads/copy/{type}/{name} — tasks are organized in subfolders
+  - Dependencies map to ../coreai-copy-shared/{type}/{name} — tasks are organized in subfolders
   - type=folder (tasks|templates|checklists|data), name=file-name
   - IMPORTANT: Only load these files when user requests specific command execution
   - TASK SUBFOLDER RESOLUTION: Tasks live in category subfolders. Use the map below to resolve:

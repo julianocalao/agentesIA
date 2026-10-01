@@ -26,8 +26,8 @@ Leia `../coreai-shared/contextos-contract.md` antes de qualquer produção. Reso
 ## PASSO 2 — Carregar DNA permanente (load: ALWAYS)
 
 Antes de qualquer escrita, ler:
-- `copy-shared/references/premissa-core.md` (Posicionamento Premium)
-- `copy-shared/references/manual-craft.md` (regras de craft RC-01..RC-10)
+- `../coreai-copy-shared/references/premissa-core.md` (Posicionamento Premium)
+- `../coreai-copy-shared/references/manual-craft.md` (regras de craft RC-01..RC-10)
 
 ## PASSO 3 — TRIAGEM (inescapável antes de criar)
 
@@ -48,7 +48,7 @@ Se o usuário já informou preço + contexto, não repetir, só confirmar e rote
 ## PASSO 4 — Despachar o copywriter certo (subagente)
 
 Conforme a triagem, escolher o escritor e despachá-lo via Agent tool, passando o
-contexto do cliente + a persona dele (`copy-shared/agents/{escritor}.md`):
+contexto do cliente + a persona dele (`../coreai-copy-shared/agents/{escritor}.md`):
 
 | Quero criar | Escritor (subagente) |
 |---|---|
@@ -69,21 +69,21 @@ O subagente escreve no estilo dele e devolve a copy. (Se for ação direta tipo
 ## PASSO 5 — Validar (obrigatório, sem exceção)
 
 Toda copy passa por 2 camadas, nesta ordem (loop até passar ou 3 iterações):
-1. **Filtro Anti-IA** — `copy-shared/validators/filtro-anti-ia.md` (5 dimensões, nota 10 em todas ou refaz).
-2. **Oráculo Torriani** — `copy-shared/validators/oraculo-torriani.md` (regras invioláveis, clichês, craft, Sugarman ≥15).
+1. **Filtro Anti-IA** — `../coreai-copy-shared/validators/filtro-anti-ia.md` (5 dimensões, nota 10 em todas ou refaz).
+2. **Oráculo Torriani** — `../coreai-copy-shared/validators/oraculo-torriani.md` (regras invioláveis, clichês, craft, Sugarman ≥15).
 
 Se reprovar no anti-IA, nem chega no oráculo. Devolve pro escritor com a lista de violações.
 
-## Material de apoio (copy-shared/)
+## Material de apoio (../coreai-copy-shared/)
 
 Além de references, agents e validators, a skill tem arsenal completo que você e os
 escritores devem consultar:
-- `copy-shared/frameworks/{escritor}/` — frameworks de cada copywriter (Halbert, Benson, etc.)
-- `copy-shared/templates/` — moldes de cada tipo de peça (sales page, VSL, e-mail, ad…)
-- `copy-shared/swipe/` — swipe files (exemplos reais que converteram)
-- `copy-shared/checklists/` — checklists de qualidade por tipo de peça
-- `copy-shared/voice/` e `copy-shared/phrases/` — voz e bancos de frases/hooks
-- `copy-shared/workflows/` — workflows de referência (lançamento, funis)
+- `../coreai-copy-shared/frameworks/{escritor}/` — frameworks de cada copywriter (Halbert, Benson, etc.)
+- `../coreai-copy-shared/templates/` — moldes de cada tipo de peça (sales page, VSL, e-mail, ad…)
+- `../coreai-copy-shared/swipe/` — swipe files (exemplos reais que converteram)
+- `../coreai-copy-shared/checklists/` — checklists de qualidade por tipo de peça
+- `../coreai-copy-shared/voice/` e `../coreai-copy-shared/phrases/` — voz e bancos de frases/hooks
+- `../coreai-copy-shared/workflows/` — workflows de referência (lançamento, funis)
 
 ## Atalhos diretos (sub-skills)
 

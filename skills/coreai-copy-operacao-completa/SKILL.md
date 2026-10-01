@@ -20,7 +20,7 @@ peças. Cada etapa alimenta a próxima. Nada avança sem o input da anterior.
 Leia `../coreai-shared/contextos-contract.md` antes de qualquer produção. Resolva o negócio ativo, rode o gate e só prossiga com READY. Sem contexto validado, bloqueie a redação e ofereça `coreai-contexto`.
 
 ## PASSO 2 — DNA permanente
-Ler `copy-shared/references/premissa-core.md` e `manual-craft.md`.
+Ler `../coreai-copy-shared/references/premissa-core.md` e `manual-craft.md`.
 
 ## PASSO 3 — As 9 etapas (não pular; veto se a anterior não entregou)
 1. **Ideia** — clarear a ideia bruta. Verificar se já existe Mapa do Domínio.
@@ -36,8 +36,8 @@ Ler `copy-shared/references/premissa-core.md` e `manual-craft.md`.
 VETO: se uma etapa não produziu o output obrigatório, não avançar. Big Idea sem prova volta pra Etapa 3.
 
 ## PASSO 4 — Validação (obrigatória em cada peça)
-1. Filtro Anti-IA (`copy-shared/validators/filtro-anti-ia.md`) — nota 10 em tudo ou refaz.
-2. Oráculo Torriani (`copy-shared/validators/oraculo-torriani.md`) — regras + clichês + craft + Sugarman ≥15.
+1. Filtro Anti-IA (`../coreai-copy-shared/validators/filtro-anti-ia.md`) — nota 10 em tudo ou refaz.
+2. Oráculo Torriani (`../coreai-copy-shared/validators/oraculo-torriani.md`) — regras + clichês + craft + Sugarman ≥15.
 
 ## Output
 Pacote da campanha: mapa, tese, big idea, narrativa, oferta, carta-mãe, arsenais e

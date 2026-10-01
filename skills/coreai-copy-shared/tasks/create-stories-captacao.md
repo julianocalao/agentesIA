@@ -13,7 +13,7 @@ Quando o usuário pede stories de captação para Instagram (a peça): um banco 
 story único pra postar e captar lead via palavra-chave no Direct.
 
 ## Inputs obrigatórios (perguntar se não vierem)
-1. **Cliente/business slug** (carregar voz de `context-os/businesses/{slug}/brand/voice/`).
+1. **Cliente/business slug** (rodar o gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>` e carregar o `contexto.md` das `sources`; voz em `negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml`, campo `voice_dna`).
 2. **A isca** (o que a pessoa recebe ao responder: relatório, guia, estudo de caso, diagnóstico, reunião).
 3. **A palavra-chave** do Direct (1 palavra, CAIXA ALTA, ex: AGENTE, REUNIÃO, BOARD).
 4. **Quantas variações** (default: 15).
@@ -22,8 +22,8 @@ story único pra postar e captar lead via palavra-chave no Direct.
 ## Passos
 
 ### 1. Carregar contexto
-- Voz do cliente (`brand/voice/nucleo.md`, `aberturas-poderosas.md`, `cliches-proibidos.md`).
-- ICP do cliente (pra calibrar dor/desejo).
+- Voz do cliente (`negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml`, campo `voice_dna`, e `negocios/<slug>/cerebro/areas/marketing/voice/` se existir). Arquivo ausente = lacuna declarada.
+- ICP do cliente (`negocios/<slug>/cerebro/empresa/contexto/icp.yaml`, pra calibrar dor/desejo).
 - Ler o template `templates/stories-captacao-tmpl.md` (estrutura + 5 tipos de abertura + regras).
 
 ### 2. Gerar o banco
@@ -33,7 +33,7 @@ story único pra postar e captar lead via palavra-chave no Direct.
 - Número específico sempre que possível.
 
 ### 3. Gravar o .md
-- Path: `outputs/copys/{slug}/campanhas/{campanha}/stories/stories-captacao-{tema}.md`
+- Path: `<raiz>/businesses/<slug>/outputs/campanhas/<campanha>/stories/stories-captacao-{tema}.md` (validar com o gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <esse caminho>` antes de gravar; exigir READY)
 - Listar as N variações numeradas, cada uma com abertura/contexto/CTA.
 
 ### 4. Validar (OBRIGATÓRIO)

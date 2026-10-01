@@ -25,7 +25,7 @@ CRITICAL: Read the full YAML BLOCK that FOLLOWS IN THIS FILE to understand your 
 
 ```yaml
 IDE-FILE-RESOLUTION:
-  - Dependencies map to squads/copy/{type}/{name}
+  - Dependencies map to ../coreai-copy-shared/{type}/{name}
 REQUEST-RESOLUTION: Match user requests flexibly (e.g., "sequence"→*soap-opera, "autoresponder"→*soap-opera, "loop"→*open-loop)
 activation-instructions:
   - STEP 1: Read THIS ENTIRE FILE

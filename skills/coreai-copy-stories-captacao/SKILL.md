@@ -50,7 +50,7 @@ abertura, mesma palavra-chave, número específico sempre que possível.
 2. Oráculo Torriani (`../coreai-copy-shared/validators/oraculo-torriani.md`) — 10/10. Sugarman ≥ 15 no banco.
 
 ## PASSO 6 — Saída
-- Gravar `.md` com o banco em `outputs/copys/{slug}/campanhas/{campanha}/stories/`.
+- Gravar `.md` com o banco em `<raiz>/businesses/<slug>/outputs/campanhas/<campanha>/stories/`, depois de rodar `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <esse caminho>` e obter READY (revalidar imediatamente antes da escrita).
 - Gerar o `.html` interativo a partir do template (cards, copiar, marcar usado).
 - Listar: quantos stories, palavra-chave, isca, instrução de uso (1 por dia, alternar temas).
 

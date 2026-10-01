@@ -61,8 +61,8 @@ workflow:
     sop_fallback_real:
       task: tasks/criacao/create-vsl.md
       agent: jon-benson
-    planning_root: "workspace/businesses/{business}/copy/{campaign_slug}/"
-    delivery_root: "outputs/copy/{business}/"
+    planning_root: "<raiz>/businesses/{business}/outputs/campanhas/{campaign_slug}/"
+    delivery_root: "<raiz>/businesses/{business}/outputs/copy/"
     review_gates:
       required:
         - checklists/hopkins-audit-checklist.md
@@ -176,7 +176,7 @@ phases:
     day: 1
     tier: 0
     description: |
-      Carregar contexto do workspace (ICP, brand, proof, offerbook) e
+      Carregar contexto do Context OS (contexto.md + cerebro: ICP, brand, proof, offerbook) e
       os 3 SOPs de referencia do framework VSL perpetuo.
       SEM este passo, nenhum output pode ser FINAL.
     tasks:
@@ -622,7 +622,7 @@ phases:
           9. Hopkins audit report
           10. Sugarman trigger report
           11. Quality checklist result
-        output: "outputs/copy/{business}/vsl/{campaign_slug}/"
+        output: "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/"
 
     checkpoint:
       criteria:
@@ -647,14 +647,14 @@ outputs:
       - belief-operations-map.yaml
       - metrics-benchmarks-plan.yaml
     delivery:
-      - "outputs/copy/{business}/vsl/{campaign_slug}/create-vsl.md"
-      - "outputs/copy/{business}/vsl/{campaign_slug}/leads/"
-      - "outputs/copy/{business}/vsl/{campaign_slug}/upsell-script.md"
-      - "outputs/copy/{business}/vsl/{campaign_slug}/downsell-script.md"
-      - "outputs/copy/{business}/vsl/{campaign_slug}/post-pitch-page.md"
-      - "outputs/copy/{business}/vsl/{campaign_slug}/creative-headlines.md"
-      - "outputs/copy/{business}/vsl/{campaign_slug}/recovery-strategy.yaml"
-      - "outputs/copy/{business}/vsl/{campaign_slug}/reports/"
+      - "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/create-vsl.md"
+      - "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/leads/"
+      - "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/upsell-script.md"
+      - "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/downsell-script.md"
+      - "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/post-pitch-page.md"
+      - "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/creative-headlines.md"
+      - "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/recovery-strategy.yaml"
+      - "<raiz>/businesses/{business}/outputs/copy/vsl/{campaign_slug}/reports/"
 
 # ═══════════════════════════════════════════════════════════════════════════
 # OPTIMIZATION MODE (quando VSL ja roda)

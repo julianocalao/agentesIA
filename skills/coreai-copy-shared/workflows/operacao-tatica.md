@@ -50,7 +50,7 @@ A Operação Tática é o modo rápido. Só funciona quando já existe base cons
 condicao_entrada:
   obrigatorio:
     - mapa_dominio_existe: true
-      verificar: "outputs/copys/{cliente}/{produto}/mapa-dominio/"
+      verificar: "<raiz>/businesses/<slug>/outputs/copy/{produto}/mapa-dominio/"
       se_nao_existe: "REDIRECIONAR para Operação Completa"
 
   recomendado:

@@ -90,7 +90,7 @@ Me manda "[PALAVRA-CHAVE]" aqui
      CONTEXTO: Faz parte de um Board com 6 especialistas que cuidam de toda a retenção da tua base.
 ```
 
-> Arquivos originais (referência viva):
+> Arquivos originais (referência histórica do pacote de origem; não existem nesta instalação):
 > - `outputs/copys/torriani/campanhas/funcionarios-ia-empresarios-mai26/mensagens-captacao-stories/`
 > - `outputs/copys/torriani/campanhas/board-sucesso-cliente/stories/`
 

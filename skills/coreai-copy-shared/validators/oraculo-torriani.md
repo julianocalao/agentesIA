@@ -45,14 +45,15 @@ Cobertura distinta:
 1. **BRIEFING ORIGINAL** (PDF Grupo Silva ou equivalente) — extrair: headline literal, gancho literal, ideia central (bullets do que precisa ter), fechamento literal. NUNCA inventar fora do briefing.
 
 2. **INTELIGÊNCIA VIRAL** — consultar o banco de inteligência do cliente no ContextOS
-   (se existir): `context-os/businesses/{slug}/intelligence/`. Extrair: estrutura de
+   (se existir): `negocios/<slug>/cerebro/areas/inteligencia/contexto/` (caminhos relativos à raiz do Context OS; ver "Onde ler o detalhe" no `contexto.md`). Extrair: estrutura de
    gancho que viralizou, formato visual, padrão de ritmo, tipo de prova usado.
    Se o cliente não tiver banco de inteligência, seguir com o briefing + voz do cliente.
 
 3. **VOZ AUTORAL DO CLIENTE** — carregar do ContextOS:
-   - `context-os/businesses/{slug}/brand-dna/voice.yaml` (tom de voz)
-   - `context-os/businesses/{slug}/brand-dna/positioning.yaml` (posicionamento)
-   - `context-os/businesses/{slug}/brand-dna/archetype.yaml` (arquétipo)
+   - `businesses/<slug>/contexto.md` (resumo do negócio, vem em `sources` do gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>`)
+   - `negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml` (tom de voz em `voice_dna`; posicionamento e arquétipo em `brand_core`, `brand_essence`, `promises`)
+   - `negocios/<slug>/cerebro/areas/marketing/voice/` (se existir)
+   - Arquivo ausente = lacuna declarada, nunca invenção.
    - Materiais de voz do cliente registrados no ContextOS (livro, transcrições, etc.)
 
 4. **NUNCA INVENTAR**:

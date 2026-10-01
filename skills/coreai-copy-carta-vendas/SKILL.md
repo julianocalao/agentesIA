@@ -19,7 +19,7 @@ desde a escrita. Copy sem estratégia é commodity, não passa.
 Leia `../coreai-shared/contextos-contract.md` antes de qualquer produção. Resolva o negócio ativo, rode o gate e só prossiga com READY. Sem contexto validado, bloqueie a redação e ofereça `coreai-contexto`.
 
 ## PASSO 2 — DNA permanente
-Ler `copy-shared/references/premissa-core.md` e `manual-craft.md`.
+Ler `../coreai-copy-shared/references/premissa-core.md` e `manual-craft.md`.
 
 ## PASSO 3 — Os 4 estágios
 1. **Estratégia** (veto se faltar): diagnóstico completo, big idea, funnel thesis,
@@ -31,11 +31,11 @@ Ler `copy-shared/references/premissa-core.md` e `manual-craft.md`.
 
 ## PASSO 4 — Despachar escritor
 Despachar o copywriter via Agent tool com: contexto do cliente, persona
-(`copy-shared/agents/{escritor}.md`), brief estratégico do estágio 1.
+(`../coreai-copy-shared/agents/{escritor}.md`), brief estratégico do estágio 1.
 
 ## PASSO 5 — Validação obrigatória (zero exceção)
-1. Filtro Anti-IA (`copy-shared/validators/filtro-anti-ia.md`) — nota 10 ou refaz.
-2. Oráculo Torriani (`copy-shared/validators/oraculo-torriani.md`) — regras, clichês, craft, Sugarman ≥15.
+1. Filtro Anti-IA (`../coreai-copy-shared/validators/filtro-anti-ia.md`) — nota 10 ou refaz.
+2. Oráculo Torriani (`../coreai-copy-shared/validators/oraculo-torriani.md`) — regras, clichês, craft, Sugarman ≥15.
 
 ## Output
 Carta de vendas completa e validada.

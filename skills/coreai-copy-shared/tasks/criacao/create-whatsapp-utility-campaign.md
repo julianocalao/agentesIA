@@ -38,7 +38,7 @@ derruba a conta do cliente. Esta task REPROVA qualquer pedido sem ato identific�
 
 ## Inputs (o copy-chief coleta antes de despachar)
 
-1. **Cliente** e voz (voice profile ou brand do workspace canônico do business)
+1. **Cliente** e voz (contexto.md das sources do gate e `negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml`, campo voice_dna)
 2. **O ato real** que o lead praticou (a transação que o Utility notifica)
 3. **Objetivo da mensagem** (confirmar, lembrar, destravar, reagendar, expirar, registrar, feedback, avisar)
 4. **Dados reais disponíveis**: protocolo, datas, nomes de variável e exemplo real de cada uma

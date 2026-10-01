@@ -134,7 +134,7 @@ etapa_1:
     - "SE ideia_produto == vazio → VETO: Não avançar sem saber o que vai vender"
     - "SE contexto_mercado == vazio → Perguntar: 'Pra quem é isso?'"
 
-  salvar_em: "outputs/copys/{cliente}/{produto}/"
+  salvar_em: "<raiz>/businesses/<slug>/outputs/copy/{produto}/"
 ```
 
 ---
@@ -193,7 +193,7 @@ etapa_2:
     - "SE promessa == vazio → VETO: Sem promessa, não tem copy"
     - "SE diferencial == vazio → ALERTA: Oferta sem diferencial é commodity"
 
-  salvar_em: "outputs/copys/{cliente}/{produto}/mapa-dominio/"
+  salvar_em: "<raiz>/businesses/<slug>/outputs/copy/{produto}/mapa-dominio/"
 
   nota: |
     Este documento é PERSISTENTE. Uma vez criado, fica salvo e pode ser reutilizado
@@ -338,7 +338,7 @@ etapa_3:
 
     output: "Dossiê de provas compilado — alimenta Big Idea e Copy Mestre"
 
-  salvar_em: "outputs/copys/{cliente}/{produto}/pesquisas/"
+  salvar_em: "<raiz>/businesses/<slug>/outputs/copy/{produto}/pesquisas/"
 ```
 
 ---
@@ -406,7 +406,7 @@ etapa_4:
     - "SE promessa é vaga → VETO: Precisa ser específica"
     - "SE iteracoes_volta > 2 → ESCALAR: Ajustar tese ou escopo"
 
-  salvar_em: "outputs/copys/{cliente}/{produto}/big-idea/"
+  salvar_em: "<raiz>/businesses/<slug>/outputs/copy/{produto}/big-idea/"
 ```
 
 ---
@@ -470,7 +470,7 @@ etapa_5:
     - "SE formatos_aplicacao == vazio → VETO: Narrativa precisa ter pelo menos 1 formato"
     - "SE narrativa não usa provas do Proof Stack → ALERTA: Narrativa sem prova é ficção"
 
-  salvar_em: "outputs/copys/{cliente}/{produto}/narrativa/"
+  salvar_em: "<raiz>/businesses/<slug>/outputs/copy/{produto}/narrativa/"
 ```
 
 ---
@@ -534,7 +534,7 @@ etapa_6:
     - "SE garantia é fraca (7 dias sem contexto) → ALERTA: Garantia que te assusta = garantia boa"
     - "SE preço baseado em custo → VETO: Cobrar baseado em valor"
 
-  salvar_em: "outputs/copys/{cliente}/{produto}/oferta/"
+  salvar_em: "<raiz>/businesses/<slug>/outputs/copy/{produto}/oferta/"
 ```
 
 ---
@@ -619,7 +619,7 @@ etapa_7:
     - "SE Hopkins < 75/100 → REFAZ elementos que falharam"
     - "SE Oráculo < 10/10 → REFAZ"
 
-  salvar_em: "outputs/copys/{cliente}/{produto}/copy-mestre/"
+  salvar_em: "<raiz>/businesses/<slug>/outputs/copy/{produto}/copy-mestre/"
 ```
 
 ---
@@ -731,8 +731,8 @@ etapa_8:
     - "SE todos angulos do mesmo tipo → VETO: Precisa diversidade"
 
   salvar_em:
-    headlines: "outputs/copys/{cliente}/{produto}/arsenais/headlines/"
-    angulos: "outputs/copys/{cliente}/{produto}/arsenais/angulos/"
+    headlines: "<raiz>/businesses/<slug>/outputs/copy/{produto}/arsenais/headlines/"
+    angulos: "<raiz>/businesses/<slug>/outputs/copy/{produto}/arsenais/angulos/"
 ```
 
 ---
@@ -838,7 +838,7 @@ etapa_9:
     - referencia: "data/manual-craft.md"
       regra: "Todo derivado → Manual de Craft (regras de escrita)"
 
-  salvar_em: "outputs/copys/{cliente}/{produto}/{campanha}/{tipo-derivado}/"
+  salvar_em: "<raiz>/businesses/<slug>/outputs/campanhas/{campanha}/{tipo-derivado}/"
 ```
 
 ---
@@ -848,7 +848,7 @@ etapa_9:
 ```yaml
 persistencia:
   estrutura_pastas:
-    outputs/copys/{cliente}/{produto}/:
+    <raiz>/businesses/<slug>/outputs/copy/{produto}/:  # gate READY antes de gravar
       mapa-dominio/:
         - "mapa-dominio.md (PERSISTENTE — reutilizável entre campanhas)"
       pesquisas/:
@@ -877,7 +877,7 @@ persistencia:
 
   consulta_automatica: |
     Quando o Copy Chief recebe um pedido de copy, SEMPRE verificar:
-    1. Existe outputs/copys/{cliente}/{produto}/mapa-dominio/ ?
+    1. Existe <raiz>/businesses/<slug>/outputs/copy/{produto}/mapa-dominio/ ?
     2. Se SIM → Carregar e oferecer Operação Tática
     3. Se NÃO → Iniciar Operação Completa
 

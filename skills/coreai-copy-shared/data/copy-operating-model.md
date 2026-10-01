@@ -30,7 +30,7 @@ The canonical operating sequence is:
 
 This operating model depends on the canonical layer separation defined in:
 
-- `workspace/domains/content/copy-information-architecture.yaml`
+- `../coreai-shared/contextos-contract.md` (raiz recebida por `--root <raiz>`; caminhos abaixo relativos a ela)
 
 ## Canonical Artifact Taxonomy
 
@@ -147,20 +147,20 @@ Use it to track:
 
 | Stage | Primary artifact | Owner | Canonical path | Source of truth | Fallback |
 |---|---|---|---|---|---|
-| Intake and Context Loading | `Campaign Brief` | copy | `workspace/businesses/{business}/copy/{campaign_slug}/campaign-brief.yaml` | campaign scope, objective, audience, channels, constraints | implicit runtime brief only for small or exploratory `DRAFT` work |
-| Message Strategy | `Message Architecture` | copy + traffic | `workspace/businesses/{business}/copy/{campaign_slug}/message-architecture.yaml` | campaign message logic, promise, proof hierarchy, language controls | may be compressed for light campaigns, not for strategic `FINAL` work |
-| Creative Direction | `Creative Brief` | copy | `workspace/businesses/{business}/copy/{campaign_slug}/creative-brief.yaml` | angle, emotional posture, mandatory proof, CTA direction | may be merged into asset planning for simple work |
-| Asset Planning | `Asset Brief` | copy | `workspace/businesses/{business}/copy/{campaign_slug}/assets/asset-brief-*.yaml` | one deliverable spec per asset | may be implicit for one small asset |
-| Writing and Delivery | `Copy Deck` | copy | `outputs/copy/{business}/...` | actual written copy and handoff state | no fallback |
+| Intake and Context Loading | `Campaign Brief` | copy | `businesses/{business}/outputs/campanhas/{campaign_slug}/campaign-brief.yaml` | campaign scope, objective, audience, channels, constraints | implicit runtime brief only for small or exploratory `DRAFT` work |
+| Message Strategy | `Message Architecture` | copy + traffic | `businesses/{business}/outputs/campanhas/{campaign_slug}/message-architecture.yaml` | campaign message logic, promise, proof hierarchy, language controls | may be compressed for light campaigns, not for strategic `FINAL` work |
+| Creative Direction | `Creative Brief` | copy | `businesses/{business}/outputs/campanhas/{campaign_slug}/creative-brief.yaml` | angle, emotional posture, mandatory proof, CTA direction | may be merged into asset planning for simple work |
+| Asset Planning | `Asset Brief` | copy | `businesses/{business}/outputs/campanhas/{campaign_slug}/assets/asset-brief-*.yaml` | one deliverable spec per asset | may be implicit for one small asset |
+| Writing and Delivery | `Copy Deck` | copy | `businesses/{business}/outputs/copy/...` | actual written copy and handoff state | no fallback |
 | Review Gates | checklist state | copy + reviewers | `checklists/` + proof/brand/product files | approval truth comes from gates plus upstream facts | no fallback |
 | Validation Loop | test / iteration notes | copy + traffic + media | channel-specific runtime evidence | live performance, qualitative feedback, next-version decisions | channel dependent |
 
 ## Durable Truth Layers
 
-- `workspace/businesses/{business}/company/` and `workspace/businesses/{business}/brand/` remain the source of truth for identity, positioning, and language rules.
-- `workspace/businesses/{business}/products/{product}/` remains the source of truth for offer design, proof, testimonials, and reusable narrative.
-- `workspace/businesses/{business}/copy/{campaign_slug}/` becomes the source of truth for campaign-specific planning.
-- `outputs/copy/{business}/` is the source of truth for executable copy artifacts.
+- `businesses/{business}/contexto.md` (always in gate `sources`) plus `negocios/{business}/cerebro/empresa/contexto/` and `negocios/{business}/cerebro/areas/marketing/contexto/brand.yaml` remain the source of truth for identity, positioning, and language rules (read-only; missing file = declared gap).
+- `negocios/{business}/cerebro/areas/produto/`, `negocios/{business}/cerebro/areas/vendas/contexto/pricing.yaml` and `negocios/{business}/cerebro/empresa/contexto/evidencias/` remain the source of truth for offer design, proof, testimonials, and reusable narrative.
+- `businesses/{business}/outputs/campanhas/{campaign_slug}/` becomes the source of truth for campaign-specific planning.
+- `businesses/{business}/outputs/copy/` is the source of truth for executable copy artifacts.
 
 ### Stage 1: Intake and Context Loading
 
@@ -173,7 +173,7 @@ Supporting references:
 
 Source of truth:
 
-- `workspace/businesses/{business}/copy/{campaign_slug}/campaign-brief.yaml`
+- `businesses/{business}/outputs/campanhas/{campaign_slug}/campaign-brief.yaml`
 - upstream brand and product files loaded by `copy-brief-protocol`
 
 Rule:
@@ -192,7 +192,7 @@ Supporting references:
 
 Source of truth:
 
-- `workspace/businesses/{business}/copy/{campaign_slug}/message-architecture.yaml`
+- `businesses/{business}/outputs/campanhas/{campaign_slug}/message-architecture.yaml`
 - brand and product truth remain upstream dependencies
 
 ### Stage 3: Creative Direction
@@ -203,7 +203,7 @@ This stage converts strategy into angle, posture, and execution constraints.
 
 Source of truth:
 
-- `workspace/businesses/{business}/copy/{campaign_slug}/creative-brief.yaml`
+- `businesses/{business}/outputs/campanhas/{campaign_slug}/creative-brief.yaml`
 
 ### Stage 4: Asset Planning
 
@@ -213,7 +213,7 @@ Use one `Asset Brief` per page, sequence, script, ad system, or other deliverabl
 
 Source of truth:
 
-- `workspace/businesses/{business}/copy/{campaign_slug}/assets/asset-brief-*.yaml`
+- `businesses/{business}/outputs/campanhas/{campaign_slug}/assets/asset-brief-*.yaml`
 
 ### Stage 5: Writing and Delivery
 
@@ -228,7 +228,7 @@ Supporting references:
 
 Source of truth:
 
-- `outputs/copy/{business}/...`
+- `businesses/{business}/outputs/copy/...`
 
 ### Stage 6: Review Gates
 

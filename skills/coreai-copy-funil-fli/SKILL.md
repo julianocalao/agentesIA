@@ -17,24 +17,24 @@ Atalho de Funil de Lucro Imediato (FLI). Despacha o especialista certo e segue o
 Leia `../coreai-shared/contextos-contract.md` antes de qualquer produção. Resolva o negócio ativo, rode o gate e só prossiga com READY. Sem contexto validado, bloqueie a redação e ofereça `coreai-contexto`.
 
 ## PASSO 2 — DNA permanente + material de apoio
-Ler `copy-shared/references/premissa-core.md` e `manual-craft.md`.
-Workflow de referência: `copy-shared/workflows/funil-fli.md` (seguir as etapas dele).
-Apoio disponível: `copy-shared/templates/`, `copy-shared/frameworks/`,
-`copy-shared/swipe/`, `copy-shared/checklists/`.
+Ler `../coreai-copy-shared/references/premissa-core.md` e `manual-craft.md`.
+Workflow de referência: `../coreai-copy-shared/workflows/funil-fli.md` (seguir as etapas dele).
+Apoio disponível: `../coreai-copy-shared/templates/`, `../coreai-copy-shared/frameworks/`,
+`../coreai-copy-shared/swipe/`, `../coreai-copy-shared/checklists/`.
 
 ## PASSO 3 — Triagem
 Confirmar faixa de preço, temperatura do público e oferta/contexto. Verificar premissas
 (tese, big idea, mecanismo único). Sem isso, avisar que sai genérico.
 
 ## PASSO 4 — Executar o workflow
-Seguir as etapas de `copy-shared/workflows/funil-fli.md`. Em cada peça, despachar o
+Seguir as etapas de `../coreai-copy-shared/workflows/funil-fli.md`. Em cada peça, despachar o
 copywriter certo via Agent tool (especialista sugerido: **russell-brunson**), passando o
-contexto + a persona (`copy-shared/agents/{escritor}.md`) + os frameworks dele
-(`copy-shared/frameworks/{escritor}/`).
+contexto + a persona (`../coreai-copy-shared/agents/{escritor}.md`) + os frameworks dele
+(`../coreai-copy-shared/frameworks/{escritor}/`).
 
 ## PASSO 5 — Validação obrigatória (cada peça)
-1. Filtro Anti-IA (`copy-shared/validators/filtro-anti-ia.md`) — nota 10 ou refaz.
-2. Oráculo Torriani (`copy-shared/validators/oraculo-torriani.md`) — regras, clichês, craft, Sugarman ≥15.
+1. Filtro Anti-IA (`../coreai-copy-shared/validators/filtro-anti-ia.md`) — nota 10 ou refaz.
+2. Oráculo Torriani (`../coreai-copy-shared/validators/oraculo-torriani.md`) — regras, clichês, craft, Sugarman ≥15.
 
 ## Output
 As peças do Funil de Lucro Imediato (FLI), validadas. Listar o que foi gerado e a ordem de uso no funil.

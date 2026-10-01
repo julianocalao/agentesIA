@@ -40,7 +40,7 @@ This task is the planning source of truth for campaign-level copy execution. It 
 ---
 
 ## Pre Conditions
-- Campaign context brief gerado (outputs/workspace-context/campaign-context-brief.yaml)
+- Campaign context brief gerado (<raiz>/businesses/<slug>/outputs/campanhas/{campaign_slug}/campaign-context-brief.yaml)
 - Business slug, product slug e campaign slug definidos
 - Offer truth e audience truth disponíveis (validados, nao inventados)
 - Workflow selecionado (wf-1 a wf-6) para determinar quais asset briefs criar
@@ -50,7 +50,7 @@ This task is the planning source of truth for campaign-level copy execution. It 
 
 ```yaml
 required:
-  - outputs/workspace-context/campaign-context-brief.yaml
+  - <raiz>/businesses/<slug>/outputs/campanhas/{campaign_slug}/campaign-context-brief.yaml
   - business_slug
   - product_slug
   - campaign_slug
@@ -145,7 +145,7 @@ Each asset brief should define:
 - input dependencies
 - required sections or beats
 - proof and CTA expectations
-- delivery path under `outputs/copy/{business}/`
+- delivery path under `<raiz>/businesses/{business}/outputs/copy/`
 
 ---
 
@@ -153,7 +153,7 @@ Each asset brief should define:
 
 The planning pack is complete only when all required files exist inside:
 
-`workspace/businesses/{business}/copy/{campaign_slug}/`
+`<raiz>/businesses/{business}/outputs/campanhas/{campaign_slug}/` (validado pelo gate `../coreai-shared/scripts/gate.py` antes de gravar)
 
 Expected files:
 

@@ -11,7 +11,7 @@ agent_owner: copy-chief
 requires_research: false
 
 output:
-  file: "outputs/copys/{cliente}/brand-dna.md"
+  file: "<raiz>/businesses/<slug>/outputs/copy/brand-dna.md"  # gate READY antes de gravar
   format: markdown
   load: AUTO_ON_CLIENT
 
@@ -378,7 +378,7 @@ Apresentar o mapa montado e perguntar:
 
 ### Step 4: Salvar
 
-Salvar em `outputs/copys/{cliente}/brand-dna.md`
+Salvar em `<raiz>/businesses/<slug>/outputs/copy/brand-dna.md` (rodar antes `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <esse caminho>` e exigir READY)
 
 ---
 
@@ -585,7 +585,7 @@ Salvar em `outputs/copys/{cliente}/brand-dna.md`
 ```yaml
 carregamento:
   quando: "Toda vez que uma task de criacao rodar para o cliente"
-  como: "O Copy Chief verifica se existe outputs/copys/{cliente}/brand-dna.md"
+  como: "O Copy Chief verifica se existe <raiz>/businesses/<slug>/outputs/copy/brand-dna.md"
   se_existe: "Carrega ANTES de iniciar a task (junto com premissa-core.md)"
   se_nao_existe: "Sugere criar com *brand-dna antes de produzir copy"
   obrigatorio: false
@@ -630,7 +630,7 @@ pre_conditions:
   - Cliente/marca identificado (nome e contexto basico)
   - Acesso ao dono da marca ou informacoes detalhadas sobre o negocio
   - Minimo 3 blocos obrigatorios respondidos (Quem sou, Diferencial, Cliente Ideal)
-  - Diretorio de output criado (outputs/copys/{cliente}/)
+  - Destino validado pelo gate (<raiz>/businesses/<slug>/outputs/copy/)
 ```
 
 ## Output Example

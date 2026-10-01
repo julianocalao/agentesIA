@@ -1,6 +1,6 @@
 # Load Workspace Context Task
 
-Task para carregar contexto operacional do `workspace` antes de executar qualquer task de copy.
+Task para carregar contexto operacional do Context OS (raiz recebida por `--root <raiz>`, contrato `../coreai-shared/contextos-contract.md`) antes de executar qualquer task de copy.
 
 ## Metadata
 
@@ -13,33 +13,33 @@ task:
   estimated_time: "10-20 min"
   executor: copy-chief
   dependencies:
-    - workspace/domains/content/copy-governance.yaml
-    - workspace/domains/content/copy-information-architecture.yaml
-    - workspace/_templates/product-offerbook/
-    - workspace/_templates/content/
-    - workspace/_templates/sales-process/
+    - ../coreai-shared/contextos-contract.md
+    - ../coreai-shared/scripts/gate.py
+    - <raiz>/businesses/<slug>/contexto.md
+    - <raiz>/negocios/<slug>/cerebro/   # somente leitura
+    - templates/   # desta biblioteca (coreai-copy-shared)
   outputs:
-    - outputs/workspace-context/campaign-context-brief.yaml
+    - <raiz>/businesses/<slug>/outputs/campanhas/{campaign_slug}/campaign-context-brief.yaml
 ```
 
 ---
 
 ## Objective
 
-Garantir que o squad de copy use dados reais e regras vigentes do workspace.
+Garantir que o squad de copy use dados reais e regras vigentes do Context OS.
 
 ---
 
 ## Pre Conditions
-- Workspace com estrutura de diretorios valida (workspace/domains/, workspace/businesses/)
-- Arquivos de governance existentes (copy-governance.yaml, copy-information-architecture.yaml)
+- Raiz do Context OS informada nesta sessão (`<raiz>`)
+- Gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>` retornando READY
 - Business slug identificado para carregar brand e product truth
-- Pelo menos um template disponivel em workspace/_templates/
+- Pelo menos um template disponivel em `templates/` desta biblioteca
 
 ## Phase 1: Governance Snapshot
 
-1. Ler `workspace/domains/content/copy-governance.yaml`.
-2. Ler `workspace/domains/content/copy-information-architecture.yaml`.
+1. Ler `../coreai-shared/contextos-contract.md`.
+2. Rodar `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>` e ler integralmente as `sources` devolvidas (sempre inclui `businesses/<slug>/contexto.md`).
 3. Extrair:
    - princípios obrigatórios
    - rules por superfície (`S1`, `S2`, `S3`)
@@ -53,11 +53,13 @@ Garantir que o squad de copy use dados reais e regras vigentes do workspace.
 ## Phase 2: Durable Truth Snapshot
 
 1. Carregar a camada `brand`:
-   - `workspace/businesses/{business}/company/`
-   - `workspace/businesses/{business}/brand/`
+   - `negocios/<slug>/cerebro/empresa/contexto/` (`company-profile`, `icp`, `founder-dna`, `credentials`)
+   - `negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml` (`voice_dna`, `brand_core`, `brand_essence`, `promises`)
 2. Carregar a camada `product`:
-   - `workspace/businesses/{business}/products/{product}/`
-   - `workspace/businesses/{business}/products/{product}/narrative/`
+   - `negocios/<slug>/cerebro/areas/produto/`
+   - `negocios/<slug>/cerebro/areas/vendas/contexto/pricing.yaml`
+   - `negocios/<slug>/cerebro/empresa/contexto/evidencias/`
+   - (caminhos relativos à raiz; ver "Onde ler o detalhe" no `contexto.md`; arquivo ausente = lacuna declarada)
 3. Registrar:
    - brand truth disponível
    - product truth disponível
@@ -68,7 +70,7 @@ Garantir que o squad de copy use dados reais e regras vigentes do workspace.
 ## Phase 3: Campaign Snapshot
 
 1. Identificar `campaign_slug` quando o trabalho for estratégico, multi-asset, high-ticket ou `FINAL`.
-2. Carregar a camada `campaign` em `workspace/businesses/{business}/copy/{campaign_slug}/` quando existir.
+2. Carregar a camada `campaign` em `<raiz>/businesses/<slug>/outputs/campanhas/{campaign_slug}/` quando existir.
 3. Registrar:
    - `campaign_brief`
    - `message_architecture`
@@ -82,10 +84,8 @@ Garantir que o squad de copy use dados reais e regras vigentes do workspace.
 
 ## Phase 4: Template Snapshot
 
-1. Carregar templates relevantes em `workspace/_templates/product-offerbook/`.
-2. Carregar templates relevantes em `workspace/_templates/content/`.
-3. Carregar templates relevantes em `workspace/_templates/sales-process/`.
-4. Para cada template usado, mapear:
+1. Carregar templates relevantes em `templates/` desta biblioteca.
+2. Para cada template usado, mapear:
    - campos obrigatórios
    - campos opcionais
    - lacunas de input do usuário
@@ -94,7 +94,7 @@ Garantir que o squad de copy use dados reais e regras vigentes do workspace.
 
 ## Output Contract
 
-Salvar arquivo `outputs/workspace-context/campaign-context-brief.yaml` com:
+Salvar arquivo `<raiz>/businesses/<slug>/outputs/campanhas/{campaign_slug}/campaign-context-brief.yaml` (gate READY antes de gravar) com:
 
 ```yaml
 campaign_context_brief:
@@ -113,7 +113,7 @@ campaign_context_brief:
     product_layer: []
     campaign_layer: []
     delivery_layer:
-      - "outputs/copy/{business}/..."
+      - "businesses/<slug>/outputs/copy/..."
   brand_truth:
     available_files: []
     missing_files: []
@@ -141,17 +141,17 @@ campaign_context_brief:
 
 ## Quality Checklist
 
-- [ ] Leu `copy-governance.yaml` e `copy-information-architecture.yaml`.
+- [ ] Leu o contrato e as `sources` do gate READY.
 - [ ] Selecionou superfície correta (`S1`, `S2` ou `S3`).
 - [ ] Mapeou brand truth, product truth e campaign truth separadamente.
-- [ ] Carregou pelo menos 1 template de `content/`, `product-offerbook/` ou `sales-process/`.
+- [ ] Carregou pelo menos 1 template de `templates/`.
 - [ ] Registrou `assumptions` e `blockers` no output final.
 
 ---
 
 ## Fallback
 
-Se algum arquivo obrigatório do workspace não existir:
+Se algum arquivo obrigatório do Context OS não existir:
 
 1. Reportar exatamente o caminho faltante.
 2. Não inventar schema/campos.
@@ -167,13 +167,13 @@ workspace_status: "loaded"
 timestamp: "2026-04-02T14:30:00Z"
 
 governance:
-  source: "workspace/domains/content/copy-governance.yaml"
+  source: "businesses/<slug>/contexto.md"
   tone: "direto, confiante, sem hype"
   forbidden_words: ["revolucionário", "incrível", "fantástico"]
   max_qualifiers_per_section: 1
 
 product_context:
-  source: "workspace/_[DEPENDÊNCIA NÃO EMPACOTADA: acelerador-digital]"
+  source: "negocios/<slug>/cerebro/areas/produto/"
   name: "Programa Acelerador Digital"
   price: 997
   mechanism: "Método 3R"
@@ -181,7 +181,7 @@ product_context:
 
 campaign_active:
   slug: "acelerador-q2-2026"
-  brief_path: "workspace/campaigns/acelerador-q2-2026/campaign-brief.yaml"
+  brief_path: "businesses/<slug>/outputs/campanhas/acelerador-q2-2026/campaign-brief.yaml"
   status: "in_production"
 
 missing_files: []
@@ -190,5 +190,5 @@ context_quality: "complete"
 ```
 
 ## Veto Conditions
-- Paths de workspace nao existem ou estao vazios
+- Gate nao retorna READY ou as sources estao vazias
 - Conflito entre contexto carregado e premissa-core.md

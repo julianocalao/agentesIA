@@ -17,14 +17,14 @@ Atalho direto pra anúncios (resposta direta). Internamente despacha o copywrite
 Leia `../coreai-shared/contextos-contract.md` antes de qualquer produção. Resolva o negócio ativo, rode o gate e só prossiga com READY. Sem contexto validado, bloqueie a redação e ofereça `coreai-contexto`.
 
 ## PASSO 2 — DNA permanente
-Ler `copy-shared/references/premissa-core.md` e `manual-craft.md`.
+Ler `../coreai-copy-shared/references/premissa-core.md` e `manual-craft.md`.
 
 ## PASSO 3 — Triagem mínima
 Confirmar faixa de preço, temperatura do público e a oferta/contexto. Se faltar tese,
 big idea ou mecanismo único, avisar que a copy sai genérica e sugerir diagnóstico.
 
 ## PASSO 4 — Formato obrigatório: Anúncio Estático
-Todo anúncio segue o template `copy-shared/templates/anuncio-estatico.md`. Carregue-o.
+Todo anúncio segue o template `../coreai-copy-shared/templates/anuncio-estatico.md`. Carregue-o.
 Cada anúncio tem 5 blocos, nesta ordem:
 - **ÂNGULO** — nome do conceito em CAIXA ALTA (rótulo). Vários anúncios compartilham o mesmo ângulo.
 - **HEADLINE** — até 10 palavras (máx 15). Choque/gancho que vai grande na arte. Nunca pergunta.
@@ -37,12 +37,12 @@ Respeitar os limites de palavras é obrigatório. Ver exemplos reais no template
 ## PASSO 5 — Despachar escritor
 Despachar via Agent tool o especialista em anúncios (resposta direta): **john-carlton**
 (alternativa: gary-halbert). Passar contexto do cliente + persona
-(`copy-shared/agents/john-carlton.md`) + o template `anuncio-estatico.md`. O escritor
+(`../coreai-copy-shared/agents/john-carlton.md`) + o template `anuncio-estatico.md`. O escritor
 produz no estilo dele, dentro do formato de 5 blocos.
 
 ## PASSO 6 — Validação obrigatória
-1. Filtro Anti-IA (`copy-shared/validators/filtro-anti-ia.md`) — nota 10 em todas as 5 dimensões ou refaz.
-2. Oráculo Torriani (`copy-shared/validators/oraculo-torriani.md`) — regras invioláveis, clichês, craft, Sugarman ≥15.
+1. Filtro Anti-IA (`../coreai-copy-shared/validators/filtro-anti-ia.md`) — nota 10 em todas as 5 dimensões ou refaz.
+2. Oráculo Torriani (`../coreai-copy-shared/validators/oraculo-torriani.md`) — regras invioláveis, clichês, craft, Sugarman ≥15.
 Loop até passar (máx 3 iterações).
 
 ## Output

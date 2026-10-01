@@ -30,7 +30,7 @@ Anotar tudo que está no briefing. Tudo que NÃO está no briefing = não invent
 Antes de escrever, ler em ordem:
 
 **Banco de inteligência viral do cliente (se existir no ContextOS):**
-- `context-os/businesses/{slug}/intelligence/` (posts/carrosséis que viralizaram,
+- `negocios/<slug>/cerebro/areas/inteligencia/contexto/` (posts/carrosséis que viralizaram,
   análise de padrões, rankings, benchmarks de referências do nicho).
 
 Se o cliente não tiver banco de inteligência montado, seguir com o briefing e a voz
@@ -50,9 +50,10 @@ do cliente (passo 3). Os swipe files em `../coreai-copy-shared/swipe/` também s
 
 ### Passo 3 — Voz autoral do cliente
 Carregar a voz do cliente do ContextOS:
-- `context-os/businesses/{slug}/brand-dna/voice.yaml` (tom de voz)
-- `context-os/businesses/{slug}/brand-dna/positioning.yaml` (posicionamento)
-- `context-os/businesses/{slug}/brand-dna/archetype.yaml` (arquétipo)
+- `businesses/<slug>/contexto.md` (resumo do negócio, vem em `sources` do gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>`)
+- `negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml` (tom de voz em `voice_dna`; posicionamento e arquétipo em `brand_core`, `brand_essence`, `promises`)
+- `negocios/<slug>/cerebro/areas/marketing/voice/` (se existir)
+- Caminhos relativos à raiz do Context OS; arquivo ausente = lacuna declarada, nunca invenção.
 - Materiais de voz registrados no ContextOS (livro, transcrições, system prompt do clone, etc.)
 
 Identificar quais cenas/casos reais do cliente podem ancorar este conteúdo.

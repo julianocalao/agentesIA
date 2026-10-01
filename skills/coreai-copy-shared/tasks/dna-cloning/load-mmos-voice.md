@@ -363,7 +363,7 @@ voice_loaded:
 
   integration:
     copy_context: "Carregado como voice overlay para tasks de criacao"
-    fallback: "Se MMOS indisponivel, usar brand-dna.md do cliente"
+    fallback: "Se MMOS indisponivel, usar contexto.md (sources do gate) + negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml (voice_dna) do cliente"
 ```
 
 ## Veto Conditions

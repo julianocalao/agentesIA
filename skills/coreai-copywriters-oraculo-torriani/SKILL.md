@@ -34,10 +34,10 @@ activation:
 
 dependencies:
   checklists:
-    - checklists/oraculo-torriani.md      # Validador Imperial (10/10 ou refaz)
-    - checklists/sugarman-30-triggers.md   # 30 Gatilhos Psicologicos (min 15)
+    - ../coreai-copy-shared/checklists/oraculo-torriani.md      # Validador Imperial (10/10 ou refaz)
+    - ../coreai-copy-shared/checklists/sugarman-30-triggers.md   # 30 Gatilhos Psicologicos (min 15)
   workflows:
-    - workflows/validacao-oraculo-torriani.md
+    - ../coreai-copy-shared/workflows/validacao-oraculo-torriani.md
 
 tags: [validador, quality-gate, oraculo, obrigatorio]
 ```

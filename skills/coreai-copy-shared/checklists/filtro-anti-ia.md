@@ -81,7 +81,7 @@ severity: VETO_BLOCKING
 order_of_application:
   1: filtro-anti-ia (UNIVERSAL — esta checklist)
   2: oraculo-posts.md OU oraculo-reels.md OU oraculo-torriani.md (formato-específico)
-  3: tom-de-voz do cliente ativo (via `node scripts/copy-context.cjs status`; brand em workspace/businesses/{cliente}/brand/)
+  3: tom-de-voz do cliente ativo (via `contexto.md` nas sources do gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>`; voz em negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml, campo voice_dna)
 -->
 
 # FILTRO DE NATURALIDADE ANTI-IA — v3.7
@@ -482,7 +482,7 @@ Não usar definições genéricas. Calibrar exemplos com a realidade do nicho.
 ❌ **ERRADO:** Usar R$3.000 como exemplo de "produto barato" (no universo Torriani é high ticket)
 ✅ **CERTO:** R$297 como low ticket, R$3.000 como high básico, R$30.000 como premium
 
-**Generalização:** Antes de inventar número, consultar o proof-bank do cliente ativo (`outputs/copys/{cliente}/`) ou `node scripts/copy-context.cjs status`. Cada nicho tem sua escala.
+**Generalização:** Antes de inventar número, consultar as provas do cliente ativo (`negocios/<slug>/cerebro/empresa/contexto/evidencias/` e `credentials.yaml`) e o `contexto.md` (sources do gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>`). Prova ausente = lacuna declarada. Cada nicho tem sua escala.
 
 ### R5 — Texto humano frequentemente é incompleto, redundante ou hesitante
 Texto polido demais é fingerprint mesmo SEM frase curta empilhada. Humano:
@@ -687,7 +687,7 @@ Total do mês: R$ 4.080 só de lazer.
 
 ### Cuidado (já está no §14 R3)
 
-Calibrar números à realidade do nicho. R$ 3.000 não é "produto barato" no universo Torriani — é high ticket básico. Antes de cravar número, consultar o proof-bank do cliente ativo (`outputs/copys/{cliente}/`) ou `node scripts/copy-context.cjs status`.
+Calibrar números à realidade do nicho. R$ 3.000 não é "produto barato" no universo Torriani — é high ticket básico. Antes de cravar número, consultar as provas do cliente ativo (`negocios/<slug>/cerebro/empresa/contexto/evidencias/` e `credentials.yaml`) e o `contexto.md` (sources do gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>`). Prova ausente = lacuna declarada.
 
 ---
 

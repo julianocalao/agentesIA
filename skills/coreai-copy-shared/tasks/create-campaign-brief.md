@@ -17,7 +17,7 @@ task:
   elicit: true
   outputs:
     - campaign-brief.yaml
-  template: "workspace/_[DEPENDÊNCIA NÃO EMPACOTADA: campaign-brief]"
+  template: "[DEPENDÊNCIA NÃO EMPACOTADA: campaign-brief]"
 ```
 
 ---
@@ -30,10 +30,10 @@ Create the minimum viable campaign brief that unlocks copy creation commands. Th
 
 ## Pre Conditions
 - Business slug e product slug definidos (via session context ou argumento)
-- Workspace com arquivos de brand e product truth acessiveis
+- Gate `../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>` em READY, com brand e product truth acessiveis
 - Usuario disponivel para responder 15 perguntas interativas
-- Template de campaign brief disponivel em workspace/_templates/content/
-- Script check-copy-gate.cjs funcional para verificacao do gate
+- Template de campaign brief disponivel (nao empacotado; sem ele, usar o schema desta task)
+- Gate do contrato (`../coreai-shared/scripts/gate.py`, Python 3.9+) disponivel
 
 ## Required Inputs
 
@@ -56,12 +56,16 @@ Load from session context — DO NOT ask the user for data that already exists:
 
 ```yaml
 auto_fill_from:
-  icp: "workspace/businesses/{business}/company/icp.yaml"
-  brandbook: "workspace/businesses/{business}/brand/brandbook.yaml"
-  offerbook: "workspace/businesses/{business}/products/{product}/offerbook.yaml"
-  proof: "workspace/businesses/{business}/products/{product}/proof.yaml"
-  testimonials: "workspace/businesses/{business}/products/{product}/testimonials.yaml"
-  pricing: "workspace/businesses/{business}/operations/pricing-strategy.yaml"
+  # caminhos relativos à raiz do Context OS; rodar antes o gate do contrato:
+  # ../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>
+  contexto: "businesses/<slug>/contexto.md"   # sempre em sources do gate
+  icp: "negocios/<slug>/cerebro/empresa/contexto/icp.yaml"
+  brandbook: "negocios/<slug>/cerebro/areas/marketing/contexto/brand.yaml"
+  offerbook: "negocios/<slug>/cerebro/areas/produto/"
+  proof: "negocios/<slug>/cerebro/empresa/contexto/evidencias/"
+  testimonials: "negocios/<slug>/cerebro/empresa/contexto/credentials.yaml"
+  pricing: "negocios/<slug>/cerebro/areas/vendas/contexto/pricing.yaml"
+  # arquivo ausente = lacuna declarada, nunca invenção"
 ```
 
 ### Step 1: Campaign Identity (Elicit)
@@ -188,21 +192,21 @@ Preço carregado: {price} ({vagas} vagas)
 2. Auto-fill `source_of_truth` with canonical file paths
 3. Auto-fill `proof` section from loaded proof.yaml and testimonials.yaml
 4. Auto-fill `constraints.brand_constraints` from brandbook.yaml forbidden words
-5. Save to `workspace/businesses/{business}/copy/{campaign_slug}/campaign-brief.yaml`
-6. Update session context with campaign_slug via `set-active-context.cjs`
+5. Save to `<raiz>/businesses/<slug>/outputs/campanhas/{campaign_slug}/campaign-brief.yaml` (gate READY antes de gravar)
+6. Report campaign_slug in the session (do not persist selection without user authorization)
 7. Show confirmation with the gate status
 
 ### Step 8: Verify Gate
 
-Run `node scripts/check-copy-gate.cjs` and show result.
+Run `python ../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>` and show result.
 
-If ALLOWED, show the now-unlocked creation commands.
+If READY, show the now-unlocked creation commands.
 
 ---
 
 ## Output Contract
 
-File saved to: `workspace/businesses/{business}/copy/{campaign_slug}/campaign-brief.yaml`
+File saved to: `<raiz>/businesses/<slug>/outputs/campanhas/{campaign_slug}/campaign-brief.yaml`
 
 Session context updated with `campaign_slug`.
 

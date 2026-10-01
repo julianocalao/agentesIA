@@ -24,7 +24,7 @@ dependencies:
   framework: frameworks/torriani/anuncios-mentoria.md
   checklist: checklists/oraculo-torriani.md
   headline_bank: swipe/headlines/_index.yaml
-  data: outputs/copys/{cliente}/proof-bank.md  # proof-bank e por cliente
+  data: negocios/<slug>/cerebro/empresa/contexto/evidencias/  # provas por cliente (relativo a <raiz>; ausente = lacuna)
 
 tags: [anuncio, estatico, meta, instagram, facebook, imagem, feed, story]
 

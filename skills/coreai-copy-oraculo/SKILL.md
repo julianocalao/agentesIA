@@ -22,12 +22,12 @@ Se a validação depende de voz/posicionamento, leia `../coreai-shared/contextos
 resolva o negócio ativo e use o `contexto.md` consolidado dele.
 
 ## PASSO 3 — Camada 0: Filtro Anti-IA
-Aplicar `copy-shared/validators/filtro-anti-ia.md`. As 5 dimensões precisam de nota 10
+Aplicar `../coreai-copy-shared/validators/filtro-anti-ia.md`. As 5 dimensões precisam de nota 10
 cada. Qualquer <10 = REPROVADO. Se reprovar, NÃO avança pro oráculo: devolve a lista
 de violações.
 
 ## PASSO 4 — Camada 1: Oráculo Torriani
-Só se passou na camada 0. Aplicar `copy-shared/validators/oraculo-torriani.md`:
+Só se passou na camada 0. Aplicar `../coreai-copy-shared/validators/oraculo-torriani.md`:
 - Regras invioláveis (RU) + clichês (CL) → veto instantâneo.
 - Craft (RC-01..RC-10).
 - 5 critérios master (10/10 cada).

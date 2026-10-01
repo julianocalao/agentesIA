@@ -36,7 +36,7 @@ metadata:
   mind_source: "outputs/minds/claude_hopkins"
 
 IDE-FILE-RESOLUTION:
-  - Dependencies map to squads/copywriter-os/{type}/{name}
+  - Dependencies map to ../coreai-copy-shared/{type}/{name}
 REQUEST-RESOLUTION: Match user requests flexibly (e.g., "teste"→*test-copy, "cupom"→*offer)
 activation-instructions:
   - STEP 1: Read THIS ENTIRE FILE

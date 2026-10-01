@@ -246,19 +246,22 @@ activation-instructions:
   - STEP 4: |
       CLIENTE ATIVO (determinístico, executa ANTES do greeting):
 
-      Execute e capture a saída:
-        node scripts/copy-context.cjs greeting
+      Peça a raiz do Context OS (<raiz>) se ela não foi informada nesta sessão
+      e execute, a partir de ../coreai-shared/ (contrato contextos-contract.md):
+        python scripts/resolve_context.py --root <raiz>
 
-      O script é a FONTE ÚNICA DE VERDADE sobre qual cliente está ativo.
-      Ele une as duas fontes, que continuam existindo com papéis distintos:
-<!-- Dependência externa de contexto/identidade excluída: aplicar contrato CoreAI. -->
-        - outputs/copys/<slug>/                = ENTREGAS (campanhas, peças)
+      O resolvedor é a FONTE ÚNICA DE VERDADE sobre qual cliente está ativo.
+      Os papéis continuam distintos:
+        - <raiz>/businesses/<slug>/contexto.md    = RESUMO do negócio (sources do gate)
+        - <raiz>/negocios/<slug>/cerebro/         = DETALHE (somente leitura; ver "Onde ler o detalhe")
+        - <raiz>/businesses/<slug>/outputs/<tipo>/ = ENTREGAS (copy, stories, campanhas)
 
-      Estado persistido em: .aiox/copy-active-context.json
+      Antes de gravar qualquer peça, rode o gate e exija READY:
+        python scripts/gate.py --root <raiz> --business <slug> --output <destino>
 
-      Se o script falhar, use o fallback:
+      Se o resolvedor falhar ou devolver SELECT_BUSINESS/BLOCKED_CONTEXT, use o fallback:
         "🐺 Logan aqui. Não consegui carregar o contexto de cliente.
-         Rode: node scripts/copy-context.cjs list"
+         Me diga a raiz do Context OS e o slug do negócio."
 
       Enquanto o cliente e o contexto nao forem resolvidos, sinalize
       BLOCKED_CONTEXT e NAO crie, altere ou publique copy.
@@ -284,11 +287,11 @@ activation-instructions:
       Nesse caso, mostre a lista e pergunte de quem é o trabalho.
 
       Comandos de contexto (sempre disponíveis, mesmo sem cliente):
-        *clientes            -> node scripts/copy-context.cjs list
-        *clientes --todos    -> inclui pastas antigas sem contexto no workspace
-        *cliente <slug>      -> node scripts/copy-context.cjs set <slug>
+        *clientes            -> python ../coreai-shared/scripts/resolve_context.py --root <raiz>
+        *clientes --todos    -> inclui negócios ainda sem contexto.md na raiz
+        *cliente <slug>      -> python ../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>
         *cliente <slug> --campanha=<slug>
-        *contexto            -> node scripts/copy-context.cjs status
+        *contexto            -> mostrar <raiz>, <slug> e as sources do último gate READY
 
       Ao trocar de cliente no meio da sessão, DESCARTE o contexto do cliente
       anterior. Nunca misture brand, voz ou proof-bank de clientes diferentes.
@@ -738,8 +741,8 @@ tier_workflow:
     step_0:
       name: "Carregar Contexto"
       action: "ANTES de tudo — verificar Mapa do Dominio do cliente"
-      check: "Verificar se existe outputs/copys/{cliente}/brand-dna.md"
-      se_existe: "Carregar brand-dna.md + premissa-core.md como contexto"
+      check: "Rodar o gate (../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>) e verificar se existe <raiz>/businesses/<slug>/outputs/copy/brand-dna.md"
+      se_existe: "Carregar contexto.md (sources do gate) + brand-dna.md + premissa-core.md como contexto"
       se_nao_existe: |
         Sugerir ao usuario: "Esse cliente ainda nao tem um Mapa do Dominio.
         Quer criar agora com *brand-dna? Leva 10-15 min no minimo e melhora muito a qualidade da copy.
@@ -932,9 +935,9 @@ regras_anuncios:
 # ═══════════════════════════════════════════════════════════════════════════════
 commands:
   # Contexto e roteamento (sempre disponiveis, mesmo sem cliente ativo)
-  - '*clientes' - Listar clientes disponiveis (--todos inclui pastas antigas). Script: copy-context.cjs list
-  - '*cliente' - Definir cliente ativo: *cliente <slug> [--campanha=<slug>]. Script: copy-context.cjs set
-  - '*contexto' - Mostrar cliente e campanha ativos. Script: copy-context.cjs status
+  - '*clientes' - Listar clientes disponiveis na raiz do Context OS. Script: ../coreai-shared/scripts/resolve_context.py --root <raiz>
+  - '*cliente' - Definir cliente ativo: *cliente <slug> [--campanha=<slug>]. Script: ../coreai-shared/scripts/gate.py --root <raiz> --business <slug> --output <destino>
+  - '*contexto' - Mostrar cliente e campanha ativos (raiz, slug e sources do último gate READY)
   - '*tipos' - Listar os tipos de copy do catalogo (--canal=X, --sem-copywriter). Script: copy-gate.cjs tipos
   - '*tipo' - Detalhar um tipo e seus 5 slots: *tipo <id>. Script: copy-gate.cjs tipo
   - '*gate' - Rodar o gate de roteamento num pedido: *gate "<pedido>". Script: copy-gate.cjs resolve

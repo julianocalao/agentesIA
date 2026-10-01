@@ -20,7 +20,7 @@ entra direto no ponto certo. Público quente, entrega rápida.
 Leia `../coreai-shared/contextos-contract.md` antes de qualquer produção. Resolva o negócio ativo, rode o gate e só prossiga com READY. Sem contexto validado, bloqueie a redação e ofereça `coreai-contexto`.
 
 ## PASSO 2 — DNA permanente
-Ler `copy-shared/references/premissa-core.md` e `manual-craft.md`.
+Ler `../coreai-copy-shared/references/premissa-core.md` e `manual-craft.md`.
 
 ## PASSO 3 — Triagem rápida (ponto de entrada)
 Perguntar o que já existe e o que quer:
@@ -35,8 +35,8 @@ VETO: se o input obrigatório não existe, criar primeiro (avisar e voltar uma e
 Conforme a peça, despachar o copywriter certo (ver tabela na skill `copy`) com o contexto.
 
 ## PASSO 5 — Validação obrigatória
-1. Filtro Anti-IA (`copy-shared/validators/filtro-anti-ia.md`).
-2. Oráculo Torriani (`copy-shared/validators/oraculo-torriani.md`).
+1. Filtro Anti-IA (`../coreai-copy-shared/validators/filtro-anti-ia.md`).
+2. Oráculo Torriani (`../coreai-copy-shared/validators/oraculo-torriani.md`).
 
 ## Output
 A peça pedida, validada. Indicar de onde partiu (qual base usou).
